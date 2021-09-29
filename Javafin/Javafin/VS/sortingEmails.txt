@@ -1,0 +1,84 @@
+
+MAIL SORTING | SELECTION | SWITCHFULLY – Léonie Bouchat
+
+
+// Function to sort and send emails
+FUNCTION sendEmail(listOfEmails, email, destination, count)
+BEGIN
+    send(email, "{destination}@parkshark.com")
+    delete(email, listOfEmails)
+    RETURN count + 1
+END
+
+// Subprocedure to print the number of emails sent 
+SUBPROCEDURE printTotalOfEmailsSent(total, recruitement, spam, sales, reception)
+BEGIN
+    WRITE(« We have sorted {total} emails :
+    {recruitement} to recruitment, {spam} to spam, {sales} to sales, {reception} to reception »)
+END
+
+
+ALGORITHM sortingEmails
+
+// Declaration of all variables
+VARIABLES 
+    listOfEmails : array[] of strings
+    recruitement, spam, sales, reception, totalofList, totalRecruitement, totalSpam, totalSales, totalReception, totalOfDay, count : integer
+    ended: boolean
+
+BEGIN
+
+    // Attribution of values
+    totalRecruitement <- 0
+    totalSpam <- 0
+    totalSales <- 0
+    totalReception <- 0
+    totalOfDay ← totalRecruitement + totalSpam + totalSales + totalReception
+    ended <- false
+
+    
+    WHILE day is not ended 
+
+        listOfEmails <- input()
+        recruitement <- 0
+        spam <- 0
+        sales <- 0
+        reception <- 0
+        totalofList <- recruitment + spam + sales + reception
+        count <-0
+
+        FOR index FROM 0 TO (length of listOfEmails)-
+                IF listOfEmails[index].lowercase() contains the word "cv" THEN
+                    recruitement <- sendEmail(listOfEmails, listOfEmails[index], "recruitment", recruitment)
+                ELSEIF listOfEmails[index] contains the word "promo" OR email contains the word
+            "advertising" THEN
+                    spam <- sendEmail(listOfEmails, listOfEmails[index], "spam", spam)
+                ELSEIF listOfEmails[index] contains the word "proposal" THEN
+                    sales <- sendEmail(listOfEmails, listOfEmails[index], "sales", sales)
+                ELSE
+                    count + 1
+                    IF  count odd THEN   
+                        send email student@parkshark.com
+                    ELSE
+                        reception <- sendEmail(listOfEmails listOfEmails[index], "reception", reception)
+                    ENDIF
+                ENDIF
+            IF
+        ENDFOR
+        
+        // Write message
+        PrintTotalOfEmailsSent(totalOfList, recruitement, spam, sales, reception)
+
+        // addition total emails of the day
+        totalRecruitement <- totalRecruitement + recruitement
+        totalSpam <- totalSpam + spam
+        totalSales <- totalSales + sales
+        totalReception <- totalReception + reception
+
+        ended = input(« Is the end of the day ? »)
+    ENDWHILE
+
+// Write message
+PrintTotalOfEmailsSent(totalOfDay, totalRecruitement, totalSpam, totalSales, totalReception)
+
+END
